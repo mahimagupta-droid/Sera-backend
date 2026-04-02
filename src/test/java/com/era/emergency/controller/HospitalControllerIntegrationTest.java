@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -23,20 +24,19 @@ class HospitalControllerIntegrationTest {
 
     @Test @Order(1)
     void shouldRegisterHospitalSuccessfully() throws Exception {
-        var payload = Map.of(
-                "name",                   "Test General Hospital",
-                "address",                "123 Test Street",
-                "city",                   "New Delhi",
-                "latitude",               28.60,
-                "longitude",              77.20,
-                "totalIcuBeds",           20,
-                "availableIcuBeds",       10,
-                "totalGeneralBeds",       100,
-                "availableGeneralBeds",   50,
-                "availableAmbulances",    4,
-                "isActive",               true,
-                "traumaCenter",           false
-        );
+        var payload = new HashMap<String, Object>();
+        payload.put("name",                 "Test General Hospital");
+        payload.put("address",              "123 Test Street");
+        payload.put("city",                 "New Delhi");
+        payload.put("latitude",             28.60);
+        payload.put("longitude",            77.20);
+        payload.put("totalIcuBeds",         20);
+        payload.put("availableIcuBeds",     10);
+        payload.put("totalGeneralBeds",     100);
+        payload.put("availableGeneralBeds", 50);
+        payload.put("availableAmbulances",  4);
+        payload.put("isActive",             true);
+        payload.put("traumaCenter",         false);
 
         mockMvc.perform(post("/hospital")
                 .contentType(MediaType.APPLICATION_JSON)
